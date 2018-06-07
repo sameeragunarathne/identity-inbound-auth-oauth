@@ -11,30 +11,6 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="getAllOAuthApplicationData">
-                <xs:complexType>
-                    <xs:sequence/>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="getAllOAuthApplicationDataResponse">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax2371:OAuthConsumerAppDTO"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="registerOAuthConsumer">
-                <xs:complexType>
-                    <xs:sequence/>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="registerOAuthConsumerResponse">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
             <xs:element name="getOAuthApplicationData">
                 <xs:complexType>
                     <xs:sequence>
@@ -178,6 +154,18 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
+            <xs:element name="getSupportedTokenTypes">
+                <xs:complexType>
+                    <xs:sequence/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getSupportedTokenTypesResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
             <xs:element name="isPKCESupportEnabled">
                 <xs:complexType>
                     <xs:sequence/>
@@ -199,6 +187,42 @@
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element minOccurs="0" name="return" nillable="true" type="ax2371:OAuthTokenExpiryTimeDTO"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getSupportedIDTokenAlgorithms">
+                <xs:complexType>
+                    <xs:sequence/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getSupportedIDTokenAlgorithmsResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax2371:OAuthIDTokenAlgorithmDTO"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="registerOAuthConsumer">
+                <xs:complexType>
+                    <xs:sequence/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="registerOAuthConsumerResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllOAuthApplicationData">
+                <xs:complexType>
+                    <xs:sequence/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllOAuthApplicationDataResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax2371:OAuthConsumerAppDTO"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -230,7 +254,9 @@
                     <xs:element minOccurs="0" name="backChannelLogoutUrl" nillable="true" type="xs:string"/>
                     <xs:element minOccurs="0" name="callbackUrl" nillable="true" type="xs:string"/>
                     <xs:element minOccurs="0" name="grantTypes" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="idTokenEncryptionAlgorithm" nillable="true" type="xs:string"/>
                     <xs:element minOccurs="0" name="idTokenEncryptionEnabled" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="idTokenEncryptionMethod" nillable="true" type="xs:string"/>
                     <xs:element minOccurs="0" name="oauthConsumerKey" nillable="true" type="xs:string"/>
                     <xs:element minOccurs="0" name="oauthConsumerSecret" nillable="true" type="xs:string"/>
                     <xs:element minOccurs="0" name="pkceMandatory" type="xs:boolean"/>
@@ -239,6 +265,7 @@
                     <xs:element minOccurs="0" name="requestObjectSignatureValidationEnabled" type="xs:boolean"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" name="scopeValidators" nillable="true" type="xs:string"/>
                     <xs:element minOccurs="0" name="state" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="tokenType" nillable="true" type="xs:string"/>
                     <xs:element minOccurs="0" name="userAccessTokenExpiryTime" type="xs:long"/>
                     <xs:element minOccurs="0" name="username" nillable="true" type="xs:string"/>
                 </xs:sequence>
@@ -263,6 +290,14 @@
                     <xs:element minOccurs="0" name="applicationAccessTokenExpiryTime" type="xs:long"/>
                     <xs:element minOccurs="0" name="refreshTokenExpiryTime" type="xs:long"/>
                     <xs:element minOccurs="0" name="userAccessTokenExpiryTime" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="OAuthIDTokenAlgorithmDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="defaultIdTokenEncryptionAlgorithm" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="defaultIdTokenEncryptionMethod" nillable="true" type="xs:string"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="supportedIdTokenEncryptionAlgorithms" nillable="true" type="xs:string"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="supportedIdTokenEncryptionMethods" nillable="true" type="xs:string"/>
                 </xs:sequence>
             </xs:complexType>
         </xs:schema>
@@ -324,6 +359,12 @@
     <wsdl:message name="getOauthApplicationStateResponse">
         <wsdl:part name="parameters" element="ns1:getOauthApplicationStateResponse"/>
     </wsdl:message>
+    <wsdl:message name="getSupportedTokenTypesRequest">
+        <wsdl:part name="parameters" element="ns1:getSupportedTokenTypes"/>
+    </wsdl:message>
+    <wsdl:message name="getSupportedTokenTypesResponse">
+        <wsdl:part name="parameters" element="ns1:getSupportedTokenTypesResponse"/>
+    </wsdl:message>
     <wsdl:message name="isPKCESupportEnabledRequest">
         <wsdl:part name="parameters" element="ns1:isPKCESupportEnabled"/>
     </wsdl:message>
@@ -363,6 +404,12 @@
     </wsdl:message>
     <wsdl:message name="getAllowedScopeValidatorsResponse">
         <wsdl:part name="parameters" element="ns1:getAllowedScopeValidatorsResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getSupportedIDTokenAlgorithmsRequest">
+        <wsdl:part name="parameters" element="ns1:getSupportedIDTokenAlgorithms"/>
+    </wsdl:message>
+    <wsdl:message name="getSupportedIDTokenAlgorithmsResponse">
+        <wsdl:part name="parameters" element="ns1:getSupportedIDTokenAlgorithmsResponse"/>
     </wsdl:message>
     <wsdl:portType name="OAuthAdminServicePortType">
         <wsdl:operation name="updateApproveAlwaysForAppConsentByResourceOwner">
@@ -413,6 +460,10 @@
             <wsdl:output message="tns:getOauthApplicationStateResponse" wsaw:Action="urn:getOauthApplicationStateResponse"/>
             <wsdl:fault message="tns:OAuthAdminServiceIdentityOAuthAdminException" name="OAuthAdminServiceIdentityOAuthAdminException" wsaw:Action="urn:getOauthApplicationStateOAuthAdminServiceIdentityOAuthAdminException"/>
         </wsdl:operation>
+        <wsdl:operation name="getSupportedTokenTypes">
+            <wsdl:input message="tns:getSupportedTokenTypesRequest" wsaw:Action="urn:getSupportedTokenTypes"/>
+            <wsdl:output message="tns:getSupportedTokenTypesResponse" wsaw:Action="urn:getSupportedTokenTypesResponse"/>
+        </wsdl:operation>
         <wsdl:operation name="isPKCESupportEnabled">
             <wsdl:input message="tns:isPKCESupportEnabledRequest" wsaw:Action="urn:isPKCESupportEnabled"/>
             <wsdl:output message="tns:isPKCESupportEnabledResponse" wsaw:Action="urn:isPKCESupportEnabledResponse"/>
@@ -449,6 +500,10 @@
         <wsdl:operation name="getAllowedScopeValidators">
             <wsdl:input message="tns:getAllowedScopeValidatorsRequest" wsaw:Action="urn:getAllowedScopeValidators"/>
             <wsdl:output message="tns:getAllowedScopeValidatorsResponse" wsaw:Action="urn:getAllowedScopeValidatorsResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getSupportedIDTokenAlgorithms">
+            <wsdl:input message="tns:getSupportedIDTokenAlgorithmsRequest" wsaw:Action="urn:getSupportedIDTokenAlgorithms"/>
+            <wsdl:output message="tns:getSupportedIDTokenAlgorithmsResponse" wsaw:Action="urn:getSupportedIDTokenAlgorithmsResponse"/>
         </wsdl:operation>
     </wsdl:portType>
     <wsdl:binding name="OAuthAdminServiceSoap11Binding" type="tns:OAuthAdminServicePortType">
@@ -567,6 +622,15 @@
                 <soap:fault use="literal" name="OAuthAdminServiceIdentityOAuthAdminException"/>
             </wsdl:fault>
         </wsdl:operation>
+        <wsdl:operation name="getSupportedTokenTypes">
+            <soap:operation soapAction="urn:getSupportedTokenTypes" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
         <wsdl:operation name="isPKCESupportEnabled">
             <soap:operation soapAction="urn:isPKCESupportEnabled" style="document"/>
             <wsdl:input>
@@ -647,6 +711,15 @@
         </wsdl:operation>
         <wsdl:operation name="getAllowedScopeValidators">
             <soap:operation soapAction="urn:getAllowedScopeValidators" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getSupportedIDTokenAlgorithms">
+            <soap:operation soapAction="urn:getSupportedIDTokenAlgorithms" style="document"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>
@@ -771,6 +844,15 @@
                 <soap12:fault use="literal" name="OAuthAdminServiceIdentityOAuthAdminException"/>
             </wsdl:fault>
         </wsdl:operation>
+        <wsdl:operation name="getSupportedTokenTypes">
+            <soap12:operation soapAction="urn:getSupportedTokenTypes" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
         <wsdl:operation name="isPKCESupportEnabled">
             <soap12:operation soapAction="urn:isPKCESupportEnabled" style="document"/>
             <wsdl:input>
@@ -851,6 +933,15 @@
         </wsdl:operation>
         <wsdl:operation name="getAllowedScopeValidators">
             <soap12:operation soapAction="urn:getAllowedScopeValidators" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getSupportedIDTokenAlgorithms">
+            <soap12:operation soapAction="urn:getSupportedIDTokenAlgorithms" style="document"/>
             <wsdl:input>
                 <soap12:body use="literal"/>
             </wsdl:input>
@@ -951,6 +1042,15 @@
                 <mime:content type="text/xml" part="parameters"/>
             </wsdl:output>
         </wsdl:operation>
+        <wsdl:operation name="getSupportedTokenTypes">
+            <http:operation location="getSupportedTokenTypes"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
         <wsdl:operation name="isPKCESupportEnabled">
             <http:operation location="isPKCESupportEnabled"/>
             <wsdl:input>
@@ -1016,6 +1116,15 @@
         </wsdl:operation>
         <wsdl:operation name="getAllowedScopeValidators">
             <http:operation location="getAllowedScopeValidators"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getSupportedIDTokenAlgorithms">
+            <http:operation location="getSupportedIDTokenAlgorithms"/>
             <wsdl:input>
                 <mime:content type="text/xml" part="parameters"/>
             </wsdl:input>

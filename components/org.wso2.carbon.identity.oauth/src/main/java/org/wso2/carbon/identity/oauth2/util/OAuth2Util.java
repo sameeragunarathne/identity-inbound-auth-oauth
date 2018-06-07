@@ -75,7 +75,6 @@ import org.wso2.carbon.identity.oauth.dao.OAuthAppDO;
 import org.wso2.carbon.identity.oauth.dao.OAuthConsumerDAO;
 import org.wso2.carbon.identity.oauth.internal.OAuthComponentServiceHolder;
 import org.wso2.carbon.identity.oauth2.IdentityOAuth2Exception;
-import org.wso2.carbon.identity.oauth2.RequestObjectException;
 import org.wso2.carbon.identity.oauth2.authz.OAuthAuthzReqMessageContext;
 import org.wso2.carbon.identity.oauth2.config.SpOAuth2ExpiryTimeConfiguration;
 import org.wso2.carbon.identity.oauth2.dao.OAuthTokenPersistenceFactory;
@@ -146,6 +145,8 @@ public class OAuth2Util {
     public static final String OPENID_CONNECT = "OpenIDConnect";
     public static final String ENABLE_OPENID_CONNECT_AUDIENCES = "EnableAudiences";
     public static final String OPENID_CONNECT_AUDIENCE = "audience";
+
+    public static final String DEFAULT_TOKEN_TYPE = "Default";
 
     private static final String ALGORITHM_NONE = "NONE";
     /*
@@ -1494,6 +1495,11 @@ public class OAuth2Util {
             return oAuthAppDO;
         } else {
             oAuthAppDO = new OAuthAppDAO().getAppInformation(clientId);
+            String tokenType = oAuthAppDO.getTokenType();
+            if(tokenType == null) {
+                tokenType = DEFAULT_TOKEN_TYPE;
+            }
+            OAuthServerConfiguration.getInstance().setOauthIdentityTokenGeneratorClassName(tokenType);
             AppInfoCache.getInstance().addToCache(clientId, oAuthAppDO);
             return oAuthAppDO;
         }

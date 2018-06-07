@@ -30,11 +30,13 @@ import org.wso2.carbon.identity.oauth.stub.dto.OAuthRevocationRequestDTO;
 import org.wso2.carbon.identity.oauth.stub.dto.OAuthRevocationResponseDTO;
 
 import java.rmi.RemoteException;
+import java.util.List;
 
 public class OAuthAdminClient {
 
     private static String[] allowedGrantTypes = null;
     private static String[] scopeValidators = null;
+    private String[] supportedTokenTypes = null;
     private OAuthAdminServiceStub stub;
     /**
      * Instantiates OAuthAdminClient
@@ -143,6 +145,22 @@ public class OAuthAdminClient {
             }
         }
         return scopeValidators;
+    }
+
+    /**
+     * Get the registered oauth token types from OAuth server configuration file.
+     *
+     * @return List of supported oauth token types
+     * @throws RemoteException exception occured during remote call
+     */
+    public String[] getSupportedTokenTypes() throws RemoteException {
+        if (supportedTokenTypes == null) {
+            supportedTokenTypes = stub.getSupportedTokenTypes();
+            if (supportedTokenTypes == null) {
+                supportedTokenTypes = new String[0];
+            }
+        }
+        return supportedTokenTypes;
     }
 
     /**
